@@ -125,6 +125,13 @@ public class StylePhrase {
         return this;
     }
 
+    public List<Builder> getBuilders() {
+        if (mBuilders == null) {
+            return new ArrayList<>();
+        }
+        return mBuilders;
+    }
+
     /**
      * cut the pattern with the separators and linked them with double link
      * structure;
@@ -488,8 +495,14 @@ public class StylePhrase {
             mCharacterStyles = new ArrayList<>();
         }
 
+
         public Builder setSize(@IntRange(from = 0) int size) {
             absoluteSizeSpan = new AbsoluteSizeSpan(size, true);
+            return this;
+        }
+
+        public Builder setSize(@IntRange(from = 0) int size, boolean dip) {
+            absoluteSizeSpan = new AbsoluteSizeSpan(size, dip);
             return this;
         }
 

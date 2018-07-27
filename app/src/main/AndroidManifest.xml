@@ -16,6 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".OneSeparatorActivity"/>
+        <activity android:name=".TwoSeparatorActivity"/>
+        <activity android:name=".MultiSeparatorActivity"/>
+        <activity android:name=".CustomSeparatorActivity"/>
     </application>
 
 </manifest>

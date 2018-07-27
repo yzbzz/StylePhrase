@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_description"
+            style="@style/UIShapeHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="5dp" />
+
+        <TextView
+            style="@style/TextViewStyle"
+            android:text="原文："
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_original"
+            style="@style/TextViewStyle" />
+
+        <TextView
+            style="@style/TextViewStyle"
+            android:text="分割符"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_separator"
+            style="@style/TextViewStyle" />
+
+        <TextView
+            style="@style/TextViewStyle"
+            android:text="设置字体和颜色："
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            style="@style/TextViewStyle" />
+
+        <TextView
+            style="@style/TextViewStyle"
+            android:text="设置粗斜体"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_content_bold_italic"
+            style="@style/TextViewStyle" />
+
+        <TextView
+            style="@style/TextViewStyle"
+            android:text="设置删除线"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_content_strike_through"
+            style="@style/TextViewStyle" />
+
+        <TextView
+            style="@style/TextViewStyle"
+            android:text="设置下划线"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_content_underline"
+            style="@style/TextViewStyle" />
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

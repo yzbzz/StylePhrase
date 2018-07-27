@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">StylePhrase</string>
+    <string name="one_separator">一种分割符</string>
+    <string name="two_separator">二种分割符</string>
+    <string name="multi_separator">多种分割符</string>
+    <string name="custom_separator">自定义分割符</string>
+
+    <string name="text_phrase_one">永生不过是场{幻梦}，唯吾{所爱}不朽</string>
+    <string name="text_phrase_two">何以{缘起}?何以[缘灭]?当以{剑歌}问之</string>
+    <string name="text_phrase_three">凤兮{凤兮}归[故乡],遨(游)四海(求其凰)</string>
+
+    <string name="text_phrase_custom">邂逅你，是(生生世世)的宿命</string>
+
 </resources>
