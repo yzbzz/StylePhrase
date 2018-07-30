@@ -67,7 +67,23 @@ tv_content.text = colorAndSize.format()
 
 Gradle
 
+1.在你根目录的`build.gradle`文件添加代码: `maven { url 'https://www.jitpack.io' }`
+
+```groovy
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://www.jitpack.io' }
+    }
+}
 ```
 
+2.在你的工程目录添加
+
+```groovy
+dependencies {
+	implementation 'com.github.yzbzz:StylePhrase:1.0.0'
+}
 ```
 
+你也可以直接下载`StylePhrase`类放到你的工程中
