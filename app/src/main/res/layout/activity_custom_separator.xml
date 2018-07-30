@@ -75,5 +75,15 @@
             android:id="@+id/tv_content_underline"
             style="@style/TextViewStyle" />
 
+        <TextView
+            style="@style/TextViewStyle"
+            android:text="分段点击"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_content_multi_click"
+            style="@style/TextViewStyle" />
+
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

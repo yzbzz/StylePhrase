@@ -4,10 +4,15 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.text.style.StrikethroughSpan
 import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
-import kotlinx.android.synthetic.main.activity_one_separator.*
+import android.view.View
+import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_custom_separator.*
 
 class CustomSeparatorActivity : AppCompatActivity() {
 
@@ -47,6 +52,31 @@ class CustomSeparatorActivity : AppCompatActivity() {
         underlinePhrase.firstBuilder.addParcelableSpan(UnderlineSpan())
         tv_content_underline.text = underlinePhrase.format()
 
+        val multiClickText = getString(R.string.text_phrase_multi_click)
+        val multiClickPhrase = StylePhrase(multiClickText)
+        multiClickPhrase.firstBuilder.setSize(20).addParcelableSpan(object : ClickableSpan() {
+            override fun onClick(widget: View?) {
+                showToast("跳转百度")
+            }
+        })
+        multiClickPhrase.secondBuilder.setSize(15).addParcelableSpan(object : ClickableSpan() {
+            override fun onClick(widget: View?) {
+                showToast("跳转网易")
+            }
+
+            override fun updateDrawState(ds: TextPaint?) {
+                ds?.color = Color.BLUE
+                ds?.isUnderlineText = false
+            }
+        })
+        tv_content_multi_click.text = multiClickPhrase.format()
+        tv_content_multi_click.movementMethod = LinkMovementMethod.getInstance()
+
+
         tv_separator.text = colorAndSize.firstBuilder.separator
+    }
+
+    fun showToast(msg: String) {
+        Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
     }
 }

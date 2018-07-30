@@ -9,8 +9,8 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.CharacterStyle;
+import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -155,13 +155,10 @@ public class StylePhrase {
         if (curChar == EOF) {
             return null;
         }
-        Log.v("lhz", "curChar: " + curChar);
-
         if (null != mBuilders) {
             for (Builder builder : mBuilders) {
                 if (curChar == builder.getLeftSeparator()) {
                     char nextChar = lookahead();
-                    Log.v("lhz", "nextChar: " + nextChar);
                     if (nextChar == builder.getLeftSeparator()) {
                         return leftSeparator(prev, nextChar);
                     } else {
@@ -375,13 +372,6 @@ public class StylePhrase {
             this.mFlags = flags;
         }
 
-
-//        OuterToken(Token prev, int textLength, int _color) {
-//            super(prev);
-//            this.textLength = textLength;
-//            this.color = _color;
-//        }
-
         @Override
         void expand(@NonNull SpannableStringBuilder target) {
 
@@ -390,7 +380,11 @@ public class StylePhrase {
 
             if (null != mCharacterStyles) {
                 for (CharacterStyle characterStyle : mCharacterStyles) {
-                    target.setSpan(CharacterStyle.wrap(characterStyle), startPoint, endPoint, mFlags);
+                    if (characterStyle instanceof ClickableSpan) {
+                        target.setSpan(characterStyle, startPoint, endPoint, mFlags);
+                    } else {
+                        target.setSpan(CharacterStyle.wrap(characterStyle), startPoint, endPoint, mFlags);
+                    }
                 }
             }
 
@@ -446,32 +440,23 @@ public class StylePhrase {
             this.mFlags = flags;
         }
 
-//        InnerToken(Token prev, String inner, int color, int size) {
-//            super(prev);
-//            this.mInnerText = inner;
-//            this.color = color;
-//            this.size = size;
-//        }
-
         @Override
         void expand(@NonNull SpannableStringBuilder target) {
 
             int replaceFrom = getFormattedStart();
             // Add 2 to account for the separators.
             int replaceTo = replaceFrom + mInnerText.length() + 2;
-            Log.v("lhz", "innerToken: " + replaceFrom + " " + replaceTo + " " + mInnerText);
             target.replace(replaceFrom, replaceTo, mInnerText);
-
 
             if (null != mCharacterStyles) {
                 for (CharacterStyle span : mCharacterStyles) {
-                    target.setSpan(CharacterStyle.wrap(span), replaceFrom, replaceTo - 2, mFlags);
+                    if (span instanceof ClickableSpan) {
+                        target.setSpan(span, replaceFrom, replaceTo - 2, mFlags);
+                    } else {
+                        target.setSpan(CharacterStyle.wrap(span), replaceFrom, replaceTo - 2, mFlags);
+                    }
                 }
             }
-//
-//            target.setSpan(new ForegroundColorSpan(color), replaceFrom, replaceTo - 2,
-//                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-//            target.setSpan(new AbsoluteSizeSpan(size), replaceFrom, replaceTo - 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
         @Override
