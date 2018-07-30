@@ -2,7 +2,7 @@
 
 StylePhrase is an Android string resource templating library
 
-在项目中，我们经常会碰到一行文本，部分文字要显示不同的颜色和大小，或者其他样式。使用`StylePhrase`可以很方便的解决这个问题。只需要把需要显示其它样式的文本使用分割符包裹一下，就可以对文本进行各种操作
+在项目中，我们经常会碰到一行文本，部分文字要显示不同的颜色和大小，或者其他样式。使用`StylePhrase`可以很方便的解决这个问题。只需要把需要显示其它样式的文本使用分割符包裹一下，就可以对文本进行各种操作。
 
 本库主要基于以下项目做了修改，更方便使用和扩展：
 
@@ -63,9 +63,11 @@ colorAndSize.addBuilder(builder)
 tv_content.text = colorAndSize.format()
 ```
 
+更多操作可以参考DEMO
+
 # Download
 
-Gradle
+使用`Gradle`进行引用
 
 1.在你根目录的`build.gradle`文件添加代码: `maven { url 'https://www.jitpack.io' }`
 
@@ -80,9 +82,12 @@ allprojects {
 
 2.在你的工程目录添加
 
+`StylePhrase`依赖`appcompat-v7`，所以需要同时引用`appcompat-v7`包
+
 ```groovy
 dependencies {
 	implementation 'com.github.yzbzz:StylePhrase:1.0.1'
+    implementation 'com.android.support:appcompat-v7:$version'
 }
 ```
 
