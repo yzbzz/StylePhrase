@@ -1,9 +1,13 @@
 package com.phrase;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
+import android.support.v4.app.Fragment;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -11,6 +15,7 @@ import android.text.style.AbsoluteSizeSpan;
 import android.text.style.CharacterStyle;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +53,26 @@ public class StylePhrase {
     private Builder mOutBuilder;
 
     private List<Builder> mBuilders;
+
+    public static StylePhrase from(CharSequence pattern) {
+        return new StylePhrase(pattern);
+    }
+
+    public static StylePhrase from(Resources resources, @StringRes int patternResourceId) {
+        return from(resources.getText(patternResourceId));
+    }
+
+    public static StylePhrase from(View view, @StringRes int patternResourceId) {
+        return from(view.getResources(), patternResourceId);
+    }
+
+    public static StylePhrase from(Fragment f, @StringRes int patternResourceId) {
+        return from(f.getResources(), patternResourceId);
+    }
+
+    public static StylePhrase from(Context ctx, @StringRes int patternResourceId) {
+        return from(ctx.getResources(), patternResourceId);
+    }
 
     public StylePhrase(@NonNull CharSequence pattern) {
         curChar = (pattern.length() > 0) ? pattern.charAt(0) : EOF;
@@ -177,22 +202,27 @@ public class StylePhrase {
      */
     @Nullable
     public CharSequence format() {
-        if (formatted == null) {
-            if (!checkPattern()) {
-                throw new IllegalStateException("the separators don't match in the pattern!");
-            }
-            createDoubleLinkWithToken();
-            // Copy the original pattern to preserve all spans, such as bold,
-            // italic, etc.
-            SpannableStringBuilder sb = new SpannableStringBuilder(pattern);
-            for (Token t = head; t != null; t = t.next) {
-                if (t instanceof OuterToken) {
-                    continue;
+        try {
+            if (formatted == null) {
+                if (!checkPattern()) {
+                    throw new IllegalStateException("the separators don't match in the pattern!");
                 }
-                t.expand(sb);
-            }
+                createDoubleLinkWithToken();
+                // Copy the original pattern to preserve all spans, such as bold,
+                // italic, etc.
+                SpannableStringBuilder sb = new SpannableStringBuilder(pattern);
+                for (Token t = head; t != null; t = t.next) {
+                    if (t instanceof OuterToken) {
+                        continue;
+                    }
+                    t.expand(sb);
+                }
 
-            formatted = sb;
+                formatted = sb;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            formatted = pattern;
         }
         return formatted;
     }
