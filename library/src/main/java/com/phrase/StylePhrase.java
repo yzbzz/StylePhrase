@@ -16,6 +16,7 @@ import android.text.style.CharacterStyle;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -225,6 +226,13 @@ public class StylePhrase {
             formatted = pattern;
         }
         return formatted;
+    }
+
+    public void into(TextView textView) {
+        if (textView == null) {
+            throw new IllegalArgumentException("TextView must not be null.");
+        }
+        textView.setText(format());
     }
 
     /**
