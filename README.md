@@ -86,7 +86,7 @@ allprojects {
 
 ```groovy
 dependencies {
-	implementation 'com.github.yzbzz:StylePhrase:1.0.1'
+	implementation 'com.github.yzbzz:StylePhrase:1.0.3'
     implementation 'com.android.support:appcompat-v7:$version'
 }
 ```
